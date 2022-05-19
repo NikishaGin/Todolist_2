@@ -7,7 +7,7 @@ export type FilterValuesType = "all" | "active" | "completed";
 
 function App() {
 
-    let [tasks, setTasks] = useState([
+    let [tasks, setTasks,] = useState([
         { id: v1(), title: "HTML&CSS", isDone: true },
         { id: v1(), title: "JS", isDone: true },
         { id: v1(), title: "ReactJS", isDone: false },
@@ -15,8 +15,16 @@ function App() {
         { id: v1(), title: "GraphQL", isDone: false },
     ]);
 
+
+
+    const AddTask = (newTitle:string) => {
+
+        setTasks([{ id: v1(), title: newTitle, isDone: false },...tasks])
+    }
+
+
     function removeTask(id: string) {
-        let filteredTasks = tasks.filter(t => t.id != id);
+        let filteredTasks = tasks.filter(t => t.id !== id);
         setTasks(filteredTasks);
     }
 
@@ -40,7 +48,8 @@ function App() {
             <Todolist title="What to learn"
                       tasks={tasksForTodolist}
                       removeTask={removeTask}
-                      changeFilter={changeFilter} />
+                      changeFilter={changeFilter}
+                      AddTask={AddTask}/>
         </div>
     );
 }
